@@ -1,4 +1,4 @@
-# aroma-config in RobotoMOD
+# aroma-config in dotmiui
 
 # LICENSE:
 #
@@ -6,7 +6,7 @@
 # Copyright (C) 2012 Wildfire S Developers Team (WFSDEVTeam/WFSDEV)
 # Copyright (C) 2012 Benjamin Gwynn & Ivan Brazza
 #
-# Distributed with RobotoMOD
+# Distributed with dotmiui
 #
 # Based on .sense installation script using AROMA with "devpackage"
 #
@@ -18,7 +18,7 @@
 #
 
 calibrate("2.7825","25","1.8833","14","yes");
-ini_set("rom_name",             "RobotoMOD");
+ini_set("rom_name",             "dotmiui");
 ini_set("rom_version",          "1");
 ini_set("rom_author",           "WFSDEV");
 ini_set("rom_device",           "HTC Wildfire S");
@@ -90,7 +90,7 @@ anisplash(
 #    "Sorry",
 #  
 #  #-- Text
-#     "RobotoMOD is not yet designed for your phone. Please click 'Restart' to cancel the installation and return to your current ROM.",
+#     "dotmiui is not yet designed for your phone. Please click 'Restart' to cancel the installation and return to your current ROM.",
 #  
 #  #-- Icon
 #    "@alert"
@@ -166,7 +166,7 @@ viewbox(
 theme("ics");
 agreebox(
   #-- Title
-    "RobotoMOD License",
+    "dotmiui License",
   
   #-- Subtitle / Description
     "Please read through this licence:",
@@ -185,11 +185,11 @@ agreebox(
 );
 
 ##########################################################################################
-# [[RobotoMOD Readme]] 
+# [[dotmiui Readme]] 
 #
 agreebox(
   #-- Title
-    "Welcome to RobotoMOD",
+    "Welcome to dotmiui",
   
   #-- Subtitle / Description
     "A quick README for you to read",
@@ -215,7 +215,7 @@ agreebox(
     "Credits",
   
   #-- Subtitle / Description
-    "Credits for RobotoMOD",
+    "Credits for dotmiui",
   
   #-- Icon
     "@update",
@@ -236,13 +236,13 @@ agreebox(
 # INSTALLATION TYPE
 #
 #- This uses Cookiejar to check if custom prefs exist on the SD card and asks the user if they want to use them
-      if prop("/sdcard/robotomod/cookiejar/aroma/previnstall.prop","previousinstall")=="yes" then
+      if prop("/sdcard/dotmiui/cookiejar/aroma/previnstall.prop","previousinstall")=="yes" then
        menubox(
           #-- Title
             "Cookiejar",
        
           #-- Sub Title
-            "It appears that you've installed RobotoMOD before. Would you like to restore your custom preferences"+
+            "It appears that you've installed dotmiui before. Would you like to restore your custom preferences"+
 	    " from your last install?",
   
           #-- Icon
@@ -256,7 +256,7 @@ agreebox(
           #-------------------------+-----------------------------------------------------------+---------------#
 	
             "Yes",                   "Yes - Use the options that you selected from your previous "+
-				     "install of RobotoMOD",                                       "@install",      #-- selected = 1
+				     "install of dotmiui",                                       "@install",      #-- selected = 1
             "No",                    "No - I want to choose my installation options again",        "@apps"          #-- selected = 2
         );  
       else
@@ -265,9 +265,9 @@ agreebox(
 	"usecustomprefs.prop",
 	"selected=2\n"  );
 endif;
-#- This checks to see if RobotoMOD is currently installed by looking at build.prop, then giving the option to update their current installation
-#- If build.prop says that RobotoMOD isn't installed, then it won't show the update option
-      if prop("/system/build.prop","ro.goo.rom")=="RobotoMOD" then
+#- This checks to see if dotmiui is currently installed by looking at build.prop, then giving the option to update their current installation
+#- If build.prop says that dotmiui isn't installed, then it won't show the update option
+      if prop("/system/build.prop","ro.goo.rom")=="dotmiui" then
        menubox(
           #-- Title
             "Installation Type",
@@ -287,9 +287,9 @@ endif;
           #-------------------------+-----------------------------------------------------------+---------------#
 	
             "Recommended",            "Will install recommended features and configurations",       "@apps",      #-- selected = 1
-            "Custom",                 "Take control and fully customize your RobotoMOD experience", "@apps",         #-- selected = 2
+            "Custom",                 "Take control and fully customize your dotmiui experience", "@apps",         #-- selected = 2
             "Minimal",                "The most compact installation possible",                     "@apps",         #-- selected = 3
-            "Update",                 "Update all RobotoMod system files",                          "@apps"          #-- selected = 4
+            "Update",                 "Update all dotmiui system files",                          "@apps"          #-- selected = 4
         );  
     else
        menubox(
@@ -311,22 +311,22 @@ endif;
           #-------------------------+-------------Damn.----------------------------------------------+---------------#
 	
             "Recommended",            "Will install recommended features and configurations",       "@apps",      #-- selected = 1
-            "Custom",                 "Take control and fully customize your RobotoMOD experience", "@apps",         #-- selected = 2
+            "Custom",                 "Take control and fully customize your dotmiui experience", "@apps",         #-- selected = 2
             "Minimal",                "The most compact installation possible",                     "@apps"         #-- selected = 3
         );
     endif;
 ###################################################################################################################
 # [[Core]]
 #
-#- Checks to see if RobotoMOD is currently installed, then asks if the user wants to keep the same core
-#- If RobotoMOD isn't currently installed, the user will be asked which core they want to use
-if prop("/system/build.prop","ro.goo.rom")=="RobotoMOD" then
+#- Checks to see if dotmiui is currently installed, then asks if the user wants to keep the same core
+#- If dotmiui isn't currently installed, the user will be asked which core they want to use
+if prop("/system/build.prop","ro.goo.rom")=="dotmiui" then
 menubox(
     #-- Title
       "Core",
 	  
     #-- Sub Title
-      "RobotoMOD can run on two different primary ROMS, AOKP and CM9 - please select one from below",
+      "dotmiui can run on two different primary ROMS, AOKP and CM9 - please select one from below",
 	  
     #-- Icon:
       "@default",
@@ -349,7 +349,7 @@ menubox(
       "Core",
 	  
     #-- Sub Title
-      "RobotoMOD can run on two different primary ROMS, AOKP and CM9 - please select one from below",
+      "dotmiui can run on two different primary ROMS, AOKP and CM9 - please select one from below",
 	  
     #-- Icon:
       "@default",
@@ -610,7 +610,7 @@ if prop("type.prop","selected")=="2" then
       "UI font preview",
   
     #-- Text
-      "Bacon ipsum dolor sit amet salami boudin rump tenderloin. T-bone boudin capicola prosciutto biltong venison, swine turducken short loin shoulder shank hamburger flank chicken ground round. Chuck salami shank, pig tri-tip ball tip chicken. Beef pork spare ribs, tri-tip pancetta sirloin sausage brisket shankle meatloaf ball tip. T-bone short ribs chuck beef, brisket swine shank pig. Cow sausage filet mignon andouille, corned beef tri-tip bacon tongue turkey short loin brisket pork fatback. Venison turkey chuck rump, prosciutto jerky beef ribeye ground round. - RobotoMOD - 1234567890",
+      "Bacon ipsum dolor sit amet salami boudin rump tenderloin. T-bone boudin capicola prosciutto biltong venison, swine turducken short loin shoulder shank hamburger flank chicken ground round. Chuck salami shank, pig tri-tip ball tip chicken. Beef pork spare ribs, tri-tip pancetta sirloin sausage brisket shankle meatloaf ball tip. T-bone short ribs chuck beef, brisket swine shank pig. Cow sausage filet mignon andouille, corned beef tri-tip bacon tongue turkey short loin brisket pork fatback. Venison turkey chuck rump, prosciutto jerky beef ribeye ground round. - dotmiui - 1234567890",
   
     #-- Icon
       "@blank"
@@ -827,7 +827,7 @@ endif;
 if prop("type.prop","selected")=="2" then
   checkbox(
     #-- Title
-      "Add stuff to RobotoMOD",
+      "Add stuff to dotmiui",
 	  
     #-- Sub Title
       "You are now able to add stuff that's not normally in the ROM",
@@ -878,7 +878,7 @@ if prop("type.prop","selected")=="2" then
       "Launcher",
 	  
     #-- Sub Title
-      "Please select what launcher you would like with RobotoMOD",
+      "Please select what launcher you would like with dotmiui",
 	  
     #-- Icon:
       "@apps",
@@ -1111,7 +1111,7 @@ menubox(
       "OTA Updates",
 	  
     #-- Sub Title
-      "Would you like OTA updates to be enabled in RobotoMOD? This installs the GooManager app which we use to provide you with easy-to-use OTA updates",
+      "Would you like OTA updates to be enabled in dotmiui? This installs the GooManager app which we use to provide you with easy-to-use OTA updates",
 	  
     #-- Icon:
       "@default",
@@ -1134,7 +1134,7 @@ menubox(
       "Cookiejar",
 	  
     #-- Sub Title
-      "Cookiejar is a system that will work with your SDCard to save what you install, so if you ever decide to reinstall RobotoMOD you can have the exact options as last time.",
+      "Cookiejar is a system that will work with your SDCard to save what you install, so if you ever decide to reinstall dotmiui you can have the exact options as last time.",
 	  
     #-- Icon:
       "@confirm",
@@ -1146,7 +1146,7 @@ menubox(
 	  # TITLE            |  SUBTITLE                                                 | Initial Value #
 	  #------------------+-----------------------------------------------------------+---------------#
 	  
-          "Active Cookiejar",                "Recommended - save what I installed in text files under \sdcard\robotomod\cookiejar",  "@agreement",
+          "Active Cookiejar",                "Recommended - save what I installed in text files under \sdcard\dotmiui\cookiejar",  "@agreement",
           "Disable Cookiejar",               "Do not use this feature at all",                                                       "@agreement"
 
 );
@@ -1191,7 +1191,7 @@ setvar("retstatus",
       "@install",
 	
 	#-- Installation Finish Message
-      "RobotoMOD installed!"
+      "dotmiui installed!"
   )
 );
 
@@ -1205,7 +1205,7 @@ viewbox(
   
   #-- Text
     "<#selectbg_g><b>Congratulations...</b></#>\n\n"+
-    "RobotoMOD has been installed."+
+    "dotmiui has been installed."+
     "Installer Status: "+getvar("retstatus"),
 
   #-- Icon
