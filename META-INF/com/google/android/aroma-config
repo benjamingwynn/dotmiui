@@ -189,23 +189,25 @@ selectbox(
 	  
     #-- Will be saved as
       "mods.prop",
-	  
+
 	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
 	  # TITLE            |  SUBTITLE                                                 | Initial Value #
 	  #------------------+-----------------------------------------------------------+---------------#
+
 	  "Music",                 "",                                                                  2,
-	    "Apollo",              "Open-source music application made by the Cyanogenmod team",        1,
+	    "MIUI",                "MIUIv4 Default",                                                    1,
+	    "Apollo",              "Open-source music application made by the Cyanogenmod team",        0,
             "Default",             "The old Gingerbread CM music player - still found in AOKP",         0,
 	    "Google Music",        "Google's offical music player made for ICS",                        0,
 	    "GMusic + Beats",      "With Beats audio notification tweak",                               0,
-	    "MIUI Music app",      "MIUI Music app",                                                    0,
 
 	  "File Explorer",         "",                                                                  2,
-	    "MIUI File Manager",   "Ported MIUI file manager",                                          1,
+	    "MIUI",                "MIUIv4 Default",                                                    1,
 	    "ES File Explorer",    "Easysoft file explorer",                                            0,
             "H File Manager",      "Simple, CM7 file manager",                                          0,
 
 	  "Gallery",               "",                                                                  2,
+	    "MIUI",                "MIUIv4 Default",                                                    1,
 	    "ICS",                 "The default ICS Gallery application",                               1,
             "Quickpic",            "Quickpic gallery application",                                      0,
 
@@ -214,41 +216,20 @@ selectbox(
             "DSP Equalizer",      "CM9's music equalizer - slightly more advanced",                     0,
             "None",               "Don't install either",                                               0,
 
-          "Boot Animationn",      "",                                                                   2,
-	    "ICS Style",          "Default ICS boot animation",                                         1,
-            "Nexus One",          "Like the old Nexus One boot?",                                       0,
-            "AOKP",               "A nice, fancy, blue AOKP boot animation",                            0,
-            "Old AOKP",           "The older, pink AOKP boot animation",                                0,
-	    "HTC Style",          "Generic white HTC Quitely Briliant boot animation",                  0,
-            "Android",            "Old-style android text",                                             0,
-	    "Honeycomb",          "Android 3.x boot animation ripped for phones",                       0,
-	    "MIUI",               "Get the MIUI love on your ICS ROM.",                                 0,
-	    "Beats Audio",        "Ripped HTC Beats Audio boot animation",                              0,
-	    "Cid",                "A smooth, holo boot animation with Cid on it!",                      0,
-	    "Interesting",        "A converted GIF - thats... interesting...",                          0,
-	    "Sense 4",            "Taken from the HTC Golf port",                                       0,
-	    "CM7",                "CM7 boot animation",                                                 0,
-	    "CM9",                "An ugly bootanimation with the old mascot on",                       0,
-	    "ParanoidAndroid",    "The stock ParanoidAndroid bootanimation",                            0,
-      
-	  "Root management",      "",                                                                   2,
-	    "Superuser",          "The classic, known Superuser application",                           1,
-	    "SuperSU",            "More advanced, secure SU management",                                0,
-	    "None",               "This will stop all root permissions being acessed by apps",          0,
-
 	  "SD2Ext tweaks",        "",                                                                   2,
 	    "Link2SD",            "Link apps to your SD Card",                                          0,
 	    "S2E",                "Set and forget.",                                                    0,
 	    "None",               "Select this if you don't have an EXT partition",                     1,
 
-	  "Beats Audio",           "",                                                                  2,
+	  "Beats Audio",          "",                                                                   2,
 	    "Full Install",       "Install and rename your phone to 'Wildfire S with Beats Audio'",     1,
 	    "Normal Install",     "Install without renaming the phone",                                 0,
 	    "Do not install",     "Doesn't install the Beats by Dr. Dre audio plug-in",                 0,
 
-	  "Sound set",           "",                                                                    2,
-	    "Sense 4",       "Install the Sense 4 UI sounds",                                           1,
-	    "ICS",           "Keep the default ICS sounds",                                             0
+	  "Sound set",            "",                                                                   2,
+	    "MIUI",                "MIUIv4 Default",                                                    1,
+	    "Sense 4",            "Install the Sense 4 UI sounds",                                      0,
+	    "ICS",                "Keep the default ICS sounds",                                        0
 );
 
 ##############################################################################################################
