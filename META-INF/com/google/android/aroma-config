@@ -1,0 +1,1225 @@
+# aroma-config in RobotoMOD
+
+# LICENSE:
+#
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+# Copyright (C) 2012 Wildfire S Developers Team (WFSDEVTeam/WFSDEV)
+# Copyright (C) 2012 Benjamin Gwynn & Ivan Brazza
+#
+# Distributed with RobotoMOD
+#
+# Based on .sense installation script using AROMA with "devpackage"
+#
+# Thanks to amarullz for the original AROMA installation manifest
+
+
+##########################################################################################
+# [[Build information]] 
+#
+
+calibrate("2.7825","25","1.8833","14","yes");
+ini_set("rom_name",             "RobotoMOD");
+ini_set("rom_version",          "1");
+ini_set("rom_author",           "WFSDEV");
+ini_set("rom_device",           "HTC Wildfire S");
+ini_set("rom_date",             "16/07/2012");
+ini_set("dp",                   "2");
+fontresload( "0", "ttf/Roboto.ttf", "12" );
+loadlang("langs/en.lang");
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+theme("ics");
+restotmp("exec/sleep","sleep");
+
+##########################################################################################
+# [[Splash screen]]
+#
+
+anisplash(
+  #-- Number of Loop
+    5,
+  #-- Files to display
+    "splash/a1", 150,
+    "splash/a2", 150,
+    "splash/a3", 150,
+    "splash/a4", 150,
+    "splash/a5", 150,
+    "splash/a6", 150
+);
+
+##########################################################################################
+# [[MarvelC/CT warning]]
+#
+# Disabled until we have a more reliable source of getting device info
+#
+##
+## Get device information
+##
+#
+#  setvar(
+#    #-- Variable Name
+#     "device",
+#    
+#    #-- Variable Value
+#      "device="+sysprop("ro.product.model")
+#  );
+#
+##
+## If the device is a marvel
+##
+#
+#if prop("device.prop","device")=="marvel" then
+#
+##
+## Do pratically nothing
+##
+#
+#theme("ics");
+#
+##
+## If device is not a marvel
+##
+#
+#else
+#
+##
+## Show a message to inform the user of this
+##
+#
+#viewbox(
+#  #-- Title
+#    "Sorry",
+#  
+#  #-- Text
+#     "RobotoMOD is not yet designed for your phone. Please click 'Restart' to cancel the installation and return to your current ROM.",
+#  
+#  #-- Icon
+#    "@alert"
+#);
+#
+##
+## Change the next button to a restart button
+##
+#
+#ini_set("text_next", "Restart");
+#
+##
+## Restart the device
+##
+#
+#reboot("now");
+#
+##
+## End the if command
+##
+#
+#endif;
+#
+
+##########################################################################################
+# [[Location information]] 
+#
+
+menubox(
+    #-- Title
+      "Welcome",
+	  
+    #-- Sub Title
+      "Before we start the installation - please inform us of your nearest location, so we can set up the best possible tweaks for you.",
+	  
+    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
+      "@default",
+	  
+    #-- Will be saved in /tmp/aroma/gps.prop
+      "gps.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+	    "Africa",          "Choose this if your nearest location is Africa",            "@welcome",  #-- selected=1
+	    "Asia",            "Choose this if your nearest location is Asia",              "@welcome",  #-- selected=2
+	    "Europe",          "Choose this if your nearest location is Europe",            "@welcome",  #-- selected=3
+	    "North America",   "Choose this if your nearest location is North America",     "@welcome",  #-- selected=4
+	    "South America",   "Choose this if your nearest location is South America",     "@welcome",  #-- selected=5
+	    "Oceania",         "Choose this if your nearest location is Oceania",           "@welcome"   #-- selected=6
+ 	   );
+
+##########################################################################################
+# [[Welcome Page]] 
+#
+theme("ics-welcome");
+viewbox(
+  #-- Title
+    "Welcome",
+  
+  #-- Text
+
+     "\n",
+  
+  #-- Icon
+    "@blank"
+);
+
+##########################################################################################
+# [[License]] 
+#
+theme("ics");
+agreebox(
+  #-- Title
+    "RobotoMOD License",
+  
+  #-- Subtitle / Description
+    "Please read through this licence:",
+  
+  #-- Icon
+    "@license",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/license.txt )
+    resread("licence.txt"),
+
+  #-- Checkbox Text
+    "I agree to these terms",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+
+##########################################################################################
+# [[RobotoMOD Readme]] 
+#
+agreebox(
+  #-- Title
+    "Welcome to RobotoMOD",
+  
+  #-- Subtitle / Description
+    "A quick README for you to read",
+  
+  #-- Icon
+    "@license",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/*.txt )
+    resread("robotomod.txt"),
+
+  #-- Checkbox Text
+    "I've read through all of the above",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+
+##########################################################################################
+# [[Credits]] 
+#
+agreebox(
+  #-- Title
+    "Credits",
+  
+  #-- Subtitle / Description
+    "Credits for RobotoMOD",
+  
+  #-- Icon
+    "@update",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/license.txt )
+    resread("credits.txt"),
+
+  #-- Checkbox Text
+    "Cool, thanks for this ROM",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+
+
+###################################################################################################################
+#
+# INSTALLATION TYPE
+#
+#- This uses Cookiejar to check if custom prefs exist on the SD card and asks the user if they want to use them
+      if prop("/sdcard/robotomod/cookiejar/aroma/previnstall.prop","previousinstall")=="yes" then
+       menubox(
+          #-- Title
+            "Cookiejar",
+       
+          #-- Sub Title
+            "It appears that you've installed RobotoMOD before. Would you like to restore your custom preferences"+
+	    " from your last install?",
+  
+          #-- Icon
+            "@install",
+    
+          #-- Will be saved in /tmp/aroma/usecustomprefs.prop
+            "usecustomprefs.prop",
+    
+          #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
+          # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
+          #-------------------------+-----------------------------------------------------------+---------------#
+	
+            "Yes",                   "Yes - Use the options that you selected from your previous "+
+				     "install of RobotoMOD",                                       "@install",      #-- selected = 1
+            "No",                    "No - I want to choose my installation options again",        "@apps"          #-- selected = 2
+        );  
+      else
+#- Fix a bug that stops the script from saving a prop.
+  writetmpfile(
+	"usecustomprefs.prop",
+	"selected=2\n"  );
+endif;
+#- This checks to see if RobotoMOD is currently installed by looking at build.prop, then giving the option to update their current installation
+#- If build.prop says that RobotoMOD isn't installed, then it won't show the update option
+      if prop("/system/build.prop","ro.goo.rom")=="RobotoMOD" then
+       menubox(
+          #-- Title
+            "Installation Type",
+       
+          #-- Sub Title
+            "Each option uses the standard CM9 base, with performance/battery tweaks by dudeman1996."+
+            "Choose the installation type that best suits your needs.",
+  
+          #-- Icon
+            "@install",
+    
+          #-- Will be saved in /tmp/aroma/type.prop
+            "type.prop",
+    
+          #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
+          # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
+          #-------------------------+-----------------------------------------------------------+---------------#
+	
+            "Recommended",            "Will install recommended features and configurations",       "@apps",      #-- selected = 1
+            "Custom",                 "Take control and fully customize your RobotoMOD experience", "@apps",         #-- selected = 2
+            "Minimal",                "The most compact installation possible",                     "@apps",         #-- selected = 3
+            "Update",                 "Update all RobotoMod system files",                          "@apps"          #-- selected = 4
+        );  
+    else
+       menubox(
+          #-- Title
+            "Installation Type",
+       
+          #-- Sub Title
+            "Each option uses the standard CM9 base, with performance/battery tweaks by dudeman1996."+
+            "Choose the installation type that best suits your needs.",
+  
+          #-- Icon
+            "@install",
+    
+          #-- Will be saved in /tmp/aroma/type.prop
+            "type.prop",
+
+          #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
+          # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
+          #-------------------------+-------------Damn.----------------------------------------------+---------------#
+	
+            "Recommended",            "Will install recommended features and configurations",       "@apps",      #-- selected = 1
+            "Custom",                 "Take control and fully customize your RobotoMOD experience", "@apps",         #-- selected = 2
+            "Minimal",                "The most compact installation possible",                     "@apps"         #-- selected = 3
+        );
+    endif;
+###################################################################################################################
+# [[Core]]
+#
+#- Checks to see if RobotoMOD is currently installed, then asks if the user wants to keep the same core
+#- If RobotoMOD isn't currently installed, the user will be asked which core they want to use
+if prop("/system/build.prop","ro.goo.rom")=="RobotoMOD" then
+menubox(
+    #-- Title
+      "Core",
+	  
+    #-- Sub Title
+      "RobotoMOD can run on two different primary ROMS, AOKP and CM9 - please select one from below",
+	  
+    #-- Icon:
+      "@default",
+	  
+    #-- Will be saved as
+      "core.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "Cyanogenmod 9",           "Alpha 6",                                                  "@install",
+          "AOKP Build 38",           "Build 38",                                                 "@install",
+	  "ParanoidAndroid",         "Alpha 2",                                                  "@install",
+          "No core",                 "Keep your current ICS installation",                       "@install"
+);
+else
+menubox(
+    #-- Title
+      "Core",
+	  
+    #-- Sub Title
+      "RobotoMOD can run on two different primary ROMS, AOKP and CM9 - please select one from below",
+	  
+    #-- Icon:
+      "@default",
+	  
+    #-- Will be saved as
+      "core.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "Cyanogenmod 9",           "Alpha 6",                                                  "@install",
+          "AOKP Build 38",           "Build 38",                                                 "@install",
+	  "ParanoidAndroid",         "Alpha 2 - now with working Wi-Fi!",                        "@install"
+);
+endif;
+###################################################################################################
+# [[Changelog/bugs for that ROM]]
+#
+#- CM9 Changelog/bugs
+if prop("core.prop","selected")=="1" then
+agreebox(
+  #-- Title
+    "CM9",
+  
+  #-- Subtitle / Description
+    "Please read through the following notice:",
+  
+  #-- Icon
+    "@agreement",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/license.txt )
+    resread("cm9.txt"),
+
+  #-- Checkbox Text
+    "I understand, continue the installation",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+endif;
+
+#- AOKP Changelog/bugs
+if prop("core.prop","selected")=="2" then
+agreebox(
+  #-- Title
+    "AOKP",
+  
+  #-- Subtitle / Description
+    "Please read through the following notice:",
+  
+  #-- Icon
+    "@agreement",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/license.txt )
+    resread("aokp.txt"),
+
+  #-- Checkbox Text
+    "I understand, continue the installation",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+endif;
+
+#- ParanoidAndroid Changelog/bugs
+if prop("core.prop","selected")=="3" then
+agreebox(
+  #-- Title
+    "Paranoid Android",
+  
+  #-- Subtitle / Description
+    "Please read through the following notice:",
+  
+  #-- Icon
+    "@agreement",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/license.txt )
+    resread("paranoid.txt"),
+
+  #-- Checkbox Text
+    "I understand, continue the installation",
+  
+  #-- Unchecked Alert Message
+    "Please check the checkbox to continue!"
+);
+endif;
+###################################################################################################
+# [[Font selection - BETA]]
+#
+#-- IF "Recommended" Installation, don't show configuration, then write default font.prop
+if prop("type.prop","selected")=="1" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/font.prop
+	  "font.prop",
+	
+	#-- Default Values
+	  "item.1.1=1\n"+    
+	  "item.1.2=0\n"+    
+	  "item.1.3=0\n"+    
+	  "item.1.4=0\n"+    
+
+	  "item.2.1=1\n"+    
+	  "item.2.2=0\n"    
+  );
+endif;
+
+#-- IF "Minimal" Installation, don't show configuration, then write default font.prop
+if prop("type.prop","selected")=="1" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/font.prop
+	  "font.prop",
+	
+	#-- Default Values
+	  "item.1.1=1\n"+
+	  "item.1.2=0\n"+
+	  "item.1.3=0\n"+
+	  "item.1.4=0\n"+
+
+	  "item.2.1=1\n"+
+	  "item.2.2=0\n"
+  );
+endif;
+
+#-- IF "Custom" Installation, don't configuration, then write to font.prop
+
+if prop("type.prop","selected")=="2" then
+selectbox(
+    #-- Title
+      "Change Fonts",
+	  
+    #-- Sub Title
+      "What fonts would you like to change?",
+	  
+    #-- Icon
+      "@welcome",
+	  
+    #-- Will be saved as
+      "font.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  "Lockscreen font",      "",                                                                   2,
+	    "Default",            "The default ICS lockscreen fontface",                                1,
+	    "Clockopia",          "A cool gingerbread font",                                            0,
+	    "Roboto",             "Use the default UI font for a more plain look",                      0,
+	    "DroidSerif",         "Same font as bellow, posh and good looking",                         0,
+
+	  "UI font",              "",                                                                   2,
+	    "Roboto",             "The default ICS font",                                               1,
+	    "DroidSerif",         "A posh, Times New Roman style font",                                 0
+);
+endif;
+
+#-- IF "Minimal" Installation, don't show configuration, then write default font.prop
+if prop("type.prop","selected")=="3" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/font.prop
+	  "font.prop",
+	
+	#-- Default Values
+	  "item.1.1=1\n"+    
+	  "item.1.2=0\n"+    
+	  "item.1.3=0\n"+    
+	  "item.1.4=0\n"+    
+
+	  "item.2.1=1\n"+    
+	  "item.2.2=0\n"
+  );
+endif;
+
+###
+#### -[Lockscreen fonts]-
+###
+
+#
+# Lock font 1
+#
+
+if prop("font.prop","selected.1")=="1" then
+fontresload( "0", "lockfont/1.ttf", "18" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+endif;
+
+#
+# Lock font 2
+#
+
+if prop("font.prop","selected.1")=="2" then
+fontresload( "0", "lockfont/2.ttf", "18" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+endif;
+
+
+#
+# Lock font 3
+#
+
+if prop("font.prop","selected.1")=="3" then
+fontresload( "0", "lockfont/3.ttf", "18" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+endif;
+
+
+#
+# Lock font 4
+#
+
+if prop("font.prop","selected.1")=="4" then
+fontresload( "0", "lockfont/4.ttf", "18" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+endif;
+
+#
+# Display font test (lock)
+#
+if prop("type.prop","selected")=="2" then
+  viewbox(
+    #-- Title
+      "Lock font preview",
+    
+    #-- Text
+      "0123456789 AM PM 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 AM PM",
+  
+    #-- Icon
+      "@blank"
+  );
+endif;
+###
+#### - UI fonts
+###
+
+#
+# UI font 1
+#
+
+if prop("font.prop","selected.2")=="1" then
+fontresload( "0", "ttf/Roboto.ttf", "12" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+endif;
+
+#
+# UI font 2
+#
+
+if prop("font.prop","selected.2")=="2" then
+fontresload( "0", "ttf/DroidSerif.ttf", "12" );
+fontresload( "1", "ttf/DroidSerif.ttf", "18" );
+endif;
+
+#
+# Actual font preview
+#
+if prop("type.prop","selected")=="2" then
+  viewbox(
+    #-- Title
+      "UI font preview",
+  
+    #-- Text
+      "Bacon ipsum dolor sit amet salami boudin rump tenderloin. T-bone boudin capicola prosciutto biltong venison, swine turducken short loin shoulder shank hamburger flank chicken ground round. Chuck salami shank, pig tri-tip ball tip chicken. Beef pork spare ribs, tri-tip pancetta sirloin sausage brisket shankle meatloaf ball tip. T-bone short ribs chuck beef, brisket swine shank pig. Cow sausage filet mignon andouille, corned beef tri-tip bacon tongue turkey short loin brisket pork fatback. Venison turkey chuck rump, prosciutto jerky beef ribeye ground round. - RobotoMOD - 1234567890",
+  
+    #-- Icon
+      "@blank"
+  );
+endif;
+#
+# Set font back to Roboto (normal)
+#
+fontresload( "0", "ttf/Roboto.ttf", "12" );
+fontresload( "1", "ttf/Roboto.ttf", "18" );
+
+
+######################################################################################################
+# [[KERNEL SELECTION]]
+#
+#-- IF "Recommended" Installation, don't show configuration, then write default kernel.prop
+#if prop("type.prop","selected")=="1" then
+#  writetmpfile(
+#   #-- Prop file will write to /tmp/aroma/kernel.prop
+#	  "kernel.prop",
+#	
+	##-- Default Values
+#	  "selected=2\n"    #-- Default Kernel = Stock CM9 
+#  );
+#endif;
+#
+##-- IF "Custom" Installation, show configuration, then write kernel.prop
+#if prop("type.prop","selected")=="2" then
+#   menubox(
+#    #-- Title
+#      "Kernel",
+	  #
+#    #-- Sub Title
+#      "Please select the kernel you want to use with your GSM Wildfire S",
+	  #
+#    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
+#      "@install",
+	  #
+#    #-- Will be saved in /tmp/aroma/mods.prop
+#      "kernel.prop",
+	  #
+#	  #-----------------------------------[ Selectbox With Groups ]-----------------------------------------#
+	  ## TITLE            |  SUBTITLE                                                        | Initial Value #
+#	  #------------------+------------------------------------------------------------------+---------------#
+#
+	#"Soulengine i",        "**Coming soon!** A tweaked version of modpunks kernel - with"+
+#			       " added govenors, higher overclock value and more",                "@personalize",
+	#"Default",             "modpunks kernel - more stable and will always stay up to date",   "@personalize"
+#
+#);
+#endif;
+#
+#if prop("type.prop","selected")=="2" then
+#alert(
+#"Sorry",
+#"Soulengine isn't ready yet, installing the default kernel..."
+#);
+#
+#writetmpfile(
+#"kernel.prop",
+#"selected=2\n" 
+#);
+#endif;
+#
+##-- IF "Minimal" Installation, don't show configuration, then write default kernel.prop
+#if prop("type.prop","selected")=="3" then
+#  writetmpfile(
+#    #-- Prop file will write to /tmp/aroma/kernel.prop
+	  #"kernel.prop",
+#	
+	##-- Default Values
+#	  "selected=2\n"    #-- Default Kernel = Stock CM9 
+#  );
+#endif;
+#
+#################################################################################################################
+# [[Selection - Only pick one]]
+#
+#-- IF "Recommended" Installation, don't show configuration, then write default mods.prop
+if prop("type.prop","selected")=="1" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/mods.prop
+	  "mods.prop",
+	
+	#-- Default Values
+	  "selected.1=1\n"+    #-- Default Music = Apollo
+	  "selected.2=1\n"+    #-- Default File Explorer = MIUI
+	  "selected.3=1\n"+    #-- Default Gallery = ICS
+	  "selected.4=1\n"+    #-- Default Audio Enhancement = MusicFX
+	  "selected.5=1\n"+    #-- Default Boot Animation = ICS
+	  "selected.6=1\n"+    #-- Default Root Management = SuperUser
+	  "selected.7=3\n"+    #-- Default EXT = none
+	  "selected.8=1\n"+    #-- Default Beats Audio = Full
+	  "selected.9=1\n"     #-- Default Soundset = Sense 4
+  );
+endif;
+
+#-- IF "Custom" Installation, show configuration, then write mods.prop
+if prop("type.prop","selected")=="2" then
+   selectbox(
+    #-- Title
+      "It's your ROM...",
+	  
+    #-- Sub Title
+      "Please select the following things you would like to change throughout your ROM.",
+	  
+    #-- Icon
+      "@welcome",
+	  
+    #-- Will be saved as
+      "mods.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  "Music",                 "",                                                                  2,
+	    "Apollo",              "Open-source music application made by the Cyanogenmod team",        1,
+            "Default",             "The old Gingerbread CM music player - still found in AOKP",         0,
+	    "Google Music",        "Google's offical music player made for ICS",                        0,
+	    "GMusic + Beats",      "With Beats audio notification tweak",                               0,
+	    "MIUI Music app",      "MIUI Music app",                                                    0,
+
+	  "File Explorer",         "",                                                                  2,
+	    "MIUI File Manager",   "Ported MIUI file manager",                                          1,
+	    "ES File Explorer",    "Easysoft file explorer",                                            0,
+            "H File Manager",      "Simple, CM7 file manager",                                          0,
+
+	  "Gallery",               "",                                                                  2,
+	    "ICS",                 "The default ICS Gallery application",                               1,
+            "Quickpic",            "Quickpic gallery application",                                      0,
+
+	  "Audio Enchatments",    "",                                                                   2,
+	    "MusicFX",            "AOKP's music equalizer",                                             1,
+            "DSP Equalizer",      "CM9's music equalizer - slightly more advanced",                     0,
+            "None",               "Don't install either",                                               0,
+
+          "Boot Animationn",      "",                                                                   2,
+	    "ICS Style",          "Default ICS boot animation",                                         1,
+            "Nexus One",          "Like the old Nexus One boot?",                                       0,
+            "AOKP",               "A nice, fancy, blue AOKP boot animation",                            0,
+            "Old AOKP",           "The older, pink AOKP boot animation",                                0,
+	    "HTC Style",          "Generic white HTC Quitely Briliant boot animation",                  0,
+            "Android",            "Old-style android text",                                             0,
+	    "Honeycomb",          "Android 3.x boot animation ripped for phones",                       0,
+	    "MIUI",               "Get the MIUI love on your ICS ROM.",                                 0,
+	    "Beats Audio",        "Ripped HTC Beats Audio boot animation",                              0,
+	    "Cid",                "A smooth, holo boot animation with Cid on it!",                      0,
+	    "Interesting",        "A converted GIF - thats... interesting...",                          0,
+	    "Sense 4",            "Taken from the HTC Golf port",                                       0,
+	    "CM7",                "CM7 boot animation",                                                 0,
+	    "CM9",                "An ugly bootanimation with the old mascot on",                       0,
+	    "ParanoidAndroid",    "The stock ParanoidAndroid bootanimation",                            0,
+      
+	  "Root management",      "",                                                                   2,
+	    "Superuser",          "The classic, known Superuser application",                           1,
+	    "SuperSU",            "More advanced, secure SU management",                                0,
+	    "None",               "This will stop all root permissions being acessed by apps",          0,
+
+	  "SD2Ext tweaks",        "",                                                                   2,
+	    "Link2SD",            "Link apps to your SD Card",                                          0,
+	    "S2E",                "Set and forget.",                                                    0,
+	    "None",               "Select this if you don't have an EXT partition",                     1,
+
+	  "Beats Audio",           "",                                                                  2,
+	    "Full Install",       "Install and rename your phone to 'Wildfire S with Beats Audio'",     1,
+	    "Normal Install",     "Install without renaming the phone",                                 0,
+	    "Do not install",     "Doesn't install the Beats by Dr. Dre audio plug-in",                 0,
+
+	  "Sound set",           "",                                                                    2,
+	    "Sense 4",       "Install the Sense 4 UI sounds",                                           1,
+	    "ICS",           "Keep the default ICS sounds",                                             0
+);
+endif;
+
+#-- IF "Minimal" Installation, don't show configuration, then write default mods.prop
+if prop("type.prop","selected")=="3" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/mods.prop
+	  "mods.prop",
+	
+	#-- Default Values
+	  "selected.1=1\n"+    #-- Default Music = Apollo
+	  "selected.2=\n"+     #-- Default File Explorer = None
+	  "selected.3=1\n"+    #-- Default Gallery = Stock
+	  "selected.4=3\n"+    #-- Default Audio Enhancement = None
+	  "selected.5=1\n"+    #-- Default Boot Animation = Stock
+	  "selected.6=1\n"+    #-- Default Root Management = SuperUser
+	  "selected.7=3\n"+    #-- Default EXT = none
+	  "selected.8=3\n"+    #-- Default Beats Audio = None
+	  "selected.9=2\n"     #-- Default Soundset = ICS
+  );
+endif;
+
+#- For updating installation
+if prop("type.prop","selected")=="4" then
+  writetmpfile(
+	  "mods.prop",
+
+	  "selected.1=0\n"+    #-- None selected
+	  "selected.2=0\n"+    #-- None selected
+	  "selected.3=0\n"+    #-- None selected
+	  "selected.4=0\n"+    #-- None selected
+	  "selected.5=0\n"+    #-- None selected
+	  "selected.6=0\n"+    #-- None selected
+	  "selected.7=0\n"+    #-- None selected
+	  "selected.8=0\n"+    #-- None selected
+	  "selected.9=0\n"     #-- None selected
+  );
+endif;
+##############################################################################################################
+# [[Selection - add shit]]
+#
+#-- IF "Custom" Installation, show configuration, then write apps.prop
+if prop("type.prop","selected")=="2" then
+  checkbox(
+    #-- Title
+      "Add stuff to RobotoMOD",
+	  
+    #-- Sub Title
+      "You are now able to add stuff that's not normally in the ROM",
+	  
+    #-- Icon
+      "@customize",
+	  
+    #-- Will be saved as
+      "apps.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+
+	  "Applications",         "",                                                                   2,
+	  "AndChat",              "A simple IRC client",                                                0,
+	  "Facebook",             "Connect to the popular social network",                              0,
+	  "Flash",                "Get the true flash experience on your phone",                        0,
+	  "Firefox",              "BETA. Please take caution using this program.",                      0,
+	  "NoFrills",             "Advanced CPU management application",                                0,
+	  "ROM Toolbox",          "Change fonts, bootanimations and more from inside the ROM",          0,
+	  "SDBooster",            "Increase your SD card read/write speeds",                            0,
+	  "TinyShark",            "Listen to free, unlimited and legal music from grooveshark",         0,
+	  "Titanium Backup",      "Backup and restore your applications",                               0,
+	  "Twitter",              "Twitter verison 3.2.2",                                              0,
+	  "XDA Free",             "Use the popular XDA forum on your phone",                            0
+  );
+endif;
+
+##################################################################################################################
+# [[Launcher]]
+#
+#-- IF "Recommended" Installation, don't show configuration, then write default launcher.prop
+if prop("type.prop","selected")=="1" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/launcher.prop
+	  "launcher.prop",
+	
+	#-- Default Values
+	  "selected=5\n"    #-- Default Launcher = Trebuchet
+  );
+endif;
+
+#-- IF "Custom" Installation, show configuration, then write launcher.prop
+if prop("type.prop","selected")=="2" then
+  menubox(
+    #-- Title
+      "Launcher",
+	  
+    #-- Sub Title
+      "Please select what launcher you would like with RobotoMOD",
+	  
+    #-- Icon:
+      "@apps",
+	  
+    #-- Will be saved as
+      "launcher.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "Apex Launcher",       "Helps you create a customized homescreen experience",           "@welcome",
+          "LGHome",              "App from LG ICS devices.",                                      "@welcome",
+          "MiHome",              "Home app from MIUI - contains lockscreen",                      "@welcome",
+          "Nova",                "Nova Launcher used in AOKP",                                    "@welcome",
+          "Stock ICS launcher",  "Default ICS launcher from the Galaxy Nexus",                    "@welcome",
+          "Trebuchet",           "CM9's launcher, pronounced tre-bu-shay",                        "@welcome"
+);
+endif;
+
+#-- IF "Minimalist" Installation, don't show configuration, then write default launcher.prop
+if prop("type.prop","selected")=="3" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/launcher.prop
+	  "launcher.prop",
+	
+	#-- Default Values
+	  "selected=5\n"    #-- Default Launcher = Stock ICS
+  );
+endif;
+
+#-- IF "Update" Installation, don't show configuration, then write default launcher.prop
+if prop("type.prop","selected")=="4" then
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/launcher.prop
+	  "launcher.prop",
+	
+	#-- Default Values
+	  "selected=nothing_really_needs_to_go_here_but_to_avoid_errors_this_file_must_be_created-you-coulda-just-put-zero-yano\n"    #-- Default Launcher = None
+  );
+endif;
+
+
+###################################################################################################################
+# [[Ringtone selection]]
+#
+#- For recommended installation
+if prop("type.prop","selected")=="1" then
+  writetmpfile(
+    #-- Prop file
+	  "toneset.prop",
+	
+	#-- Default Values
+	  "selected=1\n"    #-- Default toneset = All
+  );
+endif;
+
+#- For normal installation
+if prop("type.prop","selected")=="2" then
+menubox(
+    #-- Title
+      "Ringtone/Notification sounds",
+	  
+    #-- Sub Title
+      "Select the Ringtone/Alarm/Notification set you wish to have installed for you to use.",
+	  
+    #-- Icon:
+      "@confirm",
+	  
+    #-- Will be saved as
+      "toneset.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "All",                    "Install all notification sounds and ringtones",       "@agreement",
+          "Sense 4",                "HTC's toneset from the Desire C",                     "@agreement",
+          "benjamingwynn's .sense", "The toneset from the .sense ROM by Benjamin Gwynn",   "@agreement",
+          "AOKP",                   "The ICS toneset with a few additions",                "@agreement",
+          "Sense 2.1",              "The toneset from the .sense ROM",                     "@agreement",
+          "None",                   "Don't install any ringtones",                         "@agreement"
+
+);
+endif;
+
+#- For minimal installation
+if prop("type.prop","selected")=="3" then
+  writetmpfile(
+    #-- Prop file
+	  "toneset.prop",
+	
+	#-- Default Values
+	  "selected=6\n"    #-- Default toneset = none
+  );
+endif;
+
+#- For update installation
+if prop("type.prop","selected")=="4" then
+  writetmpfile(
+    #-- Prop file
+	  "toneset.prop",
+	
+	#-- Default Values
+	  "selected=6\n"    #-- Default toneset = All
+  );
+endif;
+
+#####################################################################################################################
+# [[Gapps]]
+
+#
+# First, lets set all 3 automatic options to 0
+#
+
+if prop("type.prop","selected")=="1" then writetmpfile("gapps.prop","selected=0\n"); endif;
+#- We do not ask for 2, this is a manual install
+if prop("type.prop","selected")=="3" then writetmpfile("gapps.prop","selected=0\n"); endif;
+if prop("type.prop","selected")=="4" then writetmpfile("gapps.prop","selected=0\n"); endif;
+
+#
+# Now, lets show the gapps section only if you have installed CM9
+#
+
+if prop("core.prop","selected")=="1" then
+
+#
+# Enable gapps for install type 1 now that we know the user has installed CM9
+#
+
+if prop("type.prop","selected")=="1" then writetmpfile("gapps.prop","selected=1\n"); endif;
+
+#
+# Display the next screens only if we are using a custom installation
+#
+
+if prop("type.prop","selected")=="2" then
+
+#
+# Ask if the user wants gapps or not.
+#
+
+menubox(
+    #-- Title
+      "Google Apps",
+	  
+    #-- Sub Title
+      "Do you wish to install Google Apps/gapps on top of your installation? This allows you to access the Google Play Store and unlock other features for your phone.",
+	  
+    #-- Icon:
+      "@apps",
+	  
+    #-- Will be saved as
+      "gapps.prop",
+	  
+          "Install",              "Install Google Apps for more features that are found in pure ICS",      "@welcome",
+          "Don't install",        "Don't install anything Google",                                         "@welcome"
+);
+
+#
+# If the user wants gapps
+#
+
+if prop("gapps.prop","selected")=="1" then
+
+#
+# Show a menu asking if you want customizable 
+#
+
+checkbox(
+    #-- Title
+      "Extra Google Packages",
+	  
+    #-- Sub Title
+      "Do you wish to install extra Google packages?",
+	  
+    #-- Icon:
+      "@apps",
+	  
+    #-- Will be saved as
+      "gappsextra.prop",
+	  
+	  "Extra GApps packages", "",                                                                   2,
+	  "Google Now",           "Experimental siri-like app - voice activation doesn't work",         1,
+	  "4.1 market app",       "Jellybean's Market app",                                             1,
+	  "GMail",                "Get the popular GMail app",                                          1
+);
+
+#
+# End the customizable gapps installation 'if'
+#
+
+endif;
+
+#
+# End the custom installation screen
+#
+
+endif;
+
+#
+# If the core selected 
+#
+
+else
+
+#
+# Notice that for AOKP/Paranoid Android gapps must be installed after reboot via downloading a package at goo.im/gapps  
+#
+
+alert("Google Apps","Only CM9 supports intergrated gapps installation. Please download and flash a package from goo.im/gapps after you reboot.", "@icon");
+
+#
+# Now set gapps to 0 for sure.
+#
+
+writetmpfile("gapps.prop","selected=0\n");
+
+#
+# End the if file that asks if we have CM9
+#
+
+endif;
+
+###################################################################################################################
+# [[OTA Updates]]
+#
+menubox(
+    #-- Title
+      "OTA Updates",
+	  
+    #-- Sub Title
+      "Would you like OTA updates to be enabled in RobotoMOD? This installs the GooManager app which we use to provide you with easy-to-use OTA updates",
+	  
+    #-- Icon:
+      "@default",
+	  
+    #-- Will be saved as
+      "ota.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "Yes",              "Yes, enable the OTA updates feature and install GooManager",  "@install",
+          "No",               "No, don't enable OTA updates and don't install GooManager",   "@install"
+);
+##################################################################################################################
+# [[Cookiejar]]
+#
+menubox(
+    #-- Title
+      "Cookiejar",
+	  
+    #-- Sub Title
+      "Cookiejar is a system that will work with your SDCard to save what you install, so if you ever decide to reinstall RobotoMOD you can have the exact options as last time.",
+	  
+    #-- Icon:
+      "@confirm",
+	  
+    #-- Will be saved as
+      "cookiejar.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+          "Active Cookiejar",                "Recommended - save what I installed in text files under \sdcard\robotomod\cookiejar",  "@agreement",
+          "Disable Cookiejar",               "Do not use this feature at all",                                                       "@agreement"
+
+);
+
+if prop("cookiejar.prop","selected")=="1" then
+  writetmpfile("previnstall.prop","previousinstall=yes\n");
+else
+  writetmpfile("previnstall.prop","previousinstall=no\n");
+endif;
+
+##########################################################################################################
+# [[Ready for Installation?]]
+#
+ini_set("text_next", "Install Now");
+
+viewbox(
+  #-- Title
+    "Ready to Install",
+
+  #-- Text
+    "The wizard is ready to begin installation.\n\n"+
+	"Press <b>Install Now</b> to begin the installation.\n\n"+
+	"If you want to review or change any of your installation settings, press <b>Back</b>. Press Menu Key -> Quit Installation to exit the wizard.",
+
+  #-- Icon
+    "@install"
+);
+
+ini_set("text_next", "Next >");
+
+# [[Install]]
+
+setvar("retstatus",
+  install(
+	#-- Title
+      "Installing",
+	
+	#-- Installation Process message
+      "This could take a while",
+	
+	#-- Installation Icon
+      "@install",
+	
+	#-- Installation Finish Message
+      "RobotoMOD installed!"
+  )
+);
+
+ini_set("text_next", "Finish");
+#####################################################################################################
+# [[Finish]]
+#
+viewbox(
+  #-- Title
+    "Installation Completed",
+  
+  #-- Text
+    "<#selectbg_g><b>Congratulations...</b></#>\n\n"+
+    "RobotoMOD has been installed."+
+    "Installer Status: "+getvar("retstatus"),
+
+  #-- Icon
+    "@info"
+
+);
+
+#---- FINISH
+
+###
+##
+# Notice: If you encounter an error on a line that is past the end of the file then do not panic, this is a missing ");" or a missing "endif;" - read through the script looking for these and replace them if you find some missing.
+#
+# Thanks
+# - Benjamin
+##
+###
