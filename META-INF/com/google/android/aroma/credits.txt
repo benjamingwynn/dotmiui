@@ -1,6 +1,8 @@
 benjamingwynn from WFSdev made .MIUI, however, I couldn't have done it without the following people (in no particular order)...
 
 - Henry_01 (porting MIUIv4)
+- Lensflare (helping Henry_01)
+- TearsDontFalls (reodex script)
 - amarullz (AROMA installer)
 - *se-nsei (graphics)
 - alquez (original msm7k kernel and marvel device tree)
