@@ -549,7 +549,7 @@ menubox(
       "OTA Updates",
 	  
     #-- Sub Title
-      "Would you like OTA updates to be enabled in dotmiui? This installs the GooManager app which we use to provide you with easy-to-use OTA updates",
+      "Would you like OTA updates to be enabled in .MIUI? This installs the GooManager app which we use to provide you with easy-to-use OTA updates",
 	  
     #-- Icon:
       "@default",
@@ -564,36 +564,6 @@ menubox(
           "Yes",              "Yes, enable the OTA updates feature and install GooManager",  "@install",
           "No",               "No, don't enable OTA updates and don't install GooManager",   "@install"
 );
-##################################################################################################################
-# [[Cookiejar]]
-#
-menubox(
-    #-- Title
-      "Cookiejar",
-	  
-    #-- Sub Title
-      "Cookiejar is a system that will work with your SDCard to save what you install, so if you ever decide to reinstall dotmiui you can have the exact options as last time.",
-	  
-    #-- Icon:
-      "@confirm",
-	  
-    #-- Will be saved as
-      "cookiejar.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-	  
-          "Active Cookiejar",                "Recommended - save what I installed in text files under \sdcard\dotmiui\cookiejar",  "@agreement",
-          "Disable Cookiejar",               "Do not use this feature at all",                                                       "@agreement"
-
-);
-
-if prop("cookiejar.prop","selected")=="1" then
-  writetmpfile("previnstall.prop","previousinstall=yes\n");
-else
-  writetmpfile("previnstall.prop","previousinstall=no\n");
-endif;
 
 ##########################################################################################################
 # [[Ready for Installation?]]
