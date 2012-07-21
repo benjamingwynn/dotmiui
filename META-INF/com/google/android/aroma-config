@@ -198,7 +198,7 @@ agreebox(
     "@license",
   
   #-- Text Content ( Read from <AROMA Resource Dir>/*.txt )
-    resread("robotomod.txt"),
+    resread("dotmiui.txt"),
 
   #-- Checkbox Text
     "I've read through all of the above",
