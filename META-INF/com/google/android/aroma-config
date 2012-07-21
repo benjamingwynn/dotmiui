@@ -20,14 +20,14 @@
 calibrate("2.7825","25","1.8833","14","yes");
 ini_set("rom_name",             "dotmiui");
 ini_set("rom_version",          "1");
-ini_set("rom_author",           "WFSDEV");
+ini_set("rom_author",           "benjamingwynn");
 ini_set("rom_device",           "HTC Wildfire S");
 ini_set("rom_date",             "16/07/2012");
 ini_set("dp",                   "2");
 fontresload( "0", "ttf/Roboto.ttf", "12" );
 loadlang("langs/en.lang");
 fontresload( "1", "ttf/Roboto.ttf", "18" );
-theme("ics");
+theme("miuiv4");
 restotmp("exec/sleep","sleep");
 
 ##########################################################################################
@@ -45,75 +45,6 @@ anisplash(
     "splash/a5", 150,
     "splash/a6", 150
 );
-
-##########################################################################################
-# [[MarvelC/CT warning]]
-#
-# Disabled until we have a more reliable source of getting device info
-#
-##
-## Get device information
-##
-#
-#  setvar(
-#    #-- Variable Name
-#     "device",
-#    
-#    #-- Variable Value
-#      "device="+sysprop("ro.product.model")
-#  );
-#
-##
-## If the device is a marvel
-##
-#
-#if prop("device.prop","device")=="marvel" then
-#
-##
-## Do pratically nothing
-##
-#
-#theme("ics");
-#
-##
-## If device is not a marvel
-##
-#
-#else
-#
-##
-## Show a message to inform the user of this
-##
-#
-#viewbox(
-#  #-- Title
-#    "Sorry",
-#  
-#  #-- Text
-#     "dotmiui is not yet designed for your phone. Please click 'Restart' to cancel the installation and return to your current ROM.",
-#  
-#  #-- Icon
-#    "@alert"
-#);
-#
-##
-## Change the next button to a restart button
-##
-#
-#ini_set("text_next", "Restart");
-#
-##
-## Restart the device
-##
-#
-#reboot("now");
-#
-##
-## End the if command
-##
-#
-#endif;
-#
 
 ##########################################################################################
 # [[Location information]] 
@@ -147,7 +78,6 @@ menubox(
 ##########################################################################################
 # [[Welcome Page]] 
 #
-theme("ics-welcome");
 viewbox(
   #-- Title
     "Welcome",
@@ -163,7 +93,6 @@ viewbox(
 ##########################################################################################
 # [[License]] 
 #
-theme("ics");
 agreebox(
   #-- Title
     "dotmiui License",
