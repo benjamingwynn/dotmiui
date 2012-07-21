@@ -165,54 +165,19 @@ agreebox(
 # INSTALLATION TYPE
 #
 
-
-menubox(
-          #-- Title
-            "Installation Type",
-       
-          #-- Sub Title
-            "Each option uses the standard CM9 base, with performance/battery tweaks by dudeman1996."+
-            "Choose the installation type that best suits your needs.",
-  
-          #-- Icon
-            "@install",
-    
-          #-- Will be saved in /tmp/aroma/type.prop
-            "type.prop",
-
-          #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
-          # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
-          #-------------------------+-------------Damn.----------------------------------------------+---------------#
+  writetmpfile(
+    #-- Prop file will write to /tmp/aroma/type.prop
+	  "type.prop",
 	
-            "Recommended",            "Will install recommended features and configurations",       "@apps",        #-- selected = 1
-            "Custom",                 "Take control and fully customize your dotmiui experience",   "@apps"         #-- selected = 2
-);
+	#-- Default Values
+	  "selected=2\n"
+  );
 
 #################################################################################################################
 # [[Selection - Only pick one]]
 #
-#-- IF "Recommended" Installation, don't show configuration, then write default mods.prop
-if prop("type.prop","selected")=="1" then
-  writetmpfile(
-    #-- Prop file will write to /tmp/aroma/mods.prop
-	  "mods.prop",
-	
-	#-- Default Values
-	  "selected.1=1\n"+    #-- Default Music = Apollo
-	  "selected.2=1\n"+    #-- Default File Explorer = MIUI
-	  "selected.3=1\n"+    #-- Default Gallery = ICS
-	  "selected.4=1\n"+    #-- Default Audio Enhancement = MusicFX
-	  "selected.5=1\n"+    #-- Default Boot Animation = ICS
-	  "selected.6=1\n"+    #-- Default Root Management = SuperUser
-	  "selected.7=3\n"+    #-- Default EXT = none
-	  "selected.8=1\n"+    #-- Default Beats Audio = Full
-	  "selected.9=1\n"     #-- Default Soundset = Sense 4
-  );
-endif;
 
-#-- IF "Custom" Installation, show configuration, then write mods.prop
-if prop("type.prop","selected")=="2" then
-   selectbox(
+selectbox(
     #-- Title
       "It's your ROM...",
 	  
@@ -285,49 +250,12 @@ if prop("type.prop","selected")=="2" then
 	    "Sense 4",       "Install the Sense 4 UI sounds",                                           1,
 	    "ICS",           "Keep the default ICS sounds",                                             0
 );
-endif;
 
-#-- IF "Minimal" Installation, don't show configuration, then write default mods.prop
-if prop("type.prop","selected")=="3" then
-  writetmpfile(
-    #-- Prop file will write to /tmp/aroma/mods.prop
-	  "mods.prop",
-	
-	#-- Default Values
-	  "selected.1=1\n"+    #-- Default Music = Apollo
-	  "selected.2=\n"+     #-- Default File Explorer = None
-	  "selected.3=1\n"+    #-- Default Gallery = Stock
-	  "selected.4=3\n"+    #-- Default Audio Enhancement = None
-	  "selected.5=1\n"+    #-- Default Boot Animation = Stock
-	  "selected.6=1\n"+    #-- Default Root Management = SuperUser
-	  "selected.7=3\n"+    #-- Default EXT = none
-	  "selected.8=3\n"+    #-- Default Beats Audio = None
-	  "selected.9=2\n"     #-- Default Soundset = ICS
-  );
-endif;
-
-#- For updating installation
-if prop("type.prop","selected")=="4" then
-  writetmpfile(
-	  "mods.prop",
-
-	  "selected.1=0\n"+    #-- None selected
-	  "selected.2=0\n"+    #-- None selected
-	  "selected.3=0\n"+    #-- None selected
-	  "selected.4=0\n"+    #-- None selected
-	  "selected.5=0\n"+    #-- None selected
-	  "selected.6=0\n"+    #-- None selected
-	  "selected.7=0\n"+    #-- None selected
-	  "selected.8=0\n"+    #-- None selected
-	  "selected.9=0\n"     #-- None selected
-  );
-endif;
 ##############################################################################################################
 # [[Selection - add shit]]
 #
-#-- IF "Custom" Installation, show configuration, then write apps.prop
-if prop("type.prop","selected")=="2" then
-  checkbox(
+
+checkbox(
     #-- Title
       "Add stuff to dotmiui",
 	  
@@ -363,19 +291,8 @@ endif;
 ###################################################################################################################
 # [[Ringtone selection]]
 #
-#- For recommended installation
-if prop("type.prop","selected")=="1" then
-  writetmpfile(
-    #-- Prop file
-	  "toneset.prop",
-	
-	#-- Default Values
-	  "selected=1\n"    #-- Default toneset = All
-  );
-endif;
 
-#- For normal installation
-if prop("type.prop","selected")=="2" then
+
 menubox(
     #-- Title
       "Ringtone/Notification sounds",
@@ -401,29 +318,6 @@ menubox(
           "None",                   "Don't install any ringtones",                         "@agreement"
 
 );
-endif;
-
-#- For minimal installation
-if prop("type.prop","selected")=="3" then
-  writetmpfile(
-    #-- Prop file
-	  "toneset.prop",
-	
-	#-- Default Values
-	  "selected=6\n"    #-- Default toneset = none
-  );
-endif;
-
-#- For update installation
-if prop("type.prop","selected")=="4" then
-  writetmpfile(
-    #-- Prop file
-	  "toneset.prop",
-	
-	#-- Default Values
-	  "selected=6\n"    #-- Default toneset = All
-  );
-endif;
 
 #####################################################################################################################
 # [[Gapps]]
